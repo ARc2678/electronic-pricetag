@@ -18,12 +18,6 @@ public class Item {
     private String name;
     private int price;
 
-
-//    public static void main(String[] agrs){
-//        Item i = new Item("666", "szsm", "玩意", "medias",50);
-//        System.out.println(toJson(i));
-//    }
-
     public Item(){};
 
     public Item(String id, String domain, String name, int price){
@@ -44,6 +38,7 @@ public class Item {
         //去除空值
         JSONObject json = JSONObject.fromObject(obj,jsonConfig);//将java对象转换为json对象
         String str = json.toString();//将json对象转换为字符串
+        System.out.print(str);
         return str;
     }
 
@@ -70,7 +65,6 @@ public class Item {
     public String getName(){
         return name;
     }
-
 
     public void setPrice(int price){
         this.price = price;
