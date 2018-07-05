@@ -16,7 +16,7 @@ public class Item {
     private String id;
     private String domain;
     private String name;
-    private int price;
+    private double price;
 
     public Item(){};
 
@@ -38,7 +38,9 @@ public class Item {
         //去除空值
         JSONObject json = JSONObject.fromObject(obj,jsonConfig);//将java对象转换为json对象
         String str = json.toString();//将json对象转换为字符串
+
         System.out.print(str);
+
         return str;
     }
 
@@ -66,11 +68,11 @@ public class Item {
         return name;
     }
 
-    public void setPrice(int price){
+    public void setPrice(double price){
         this.price = price;
     }
 
-    public int getPrice(){
+    public double getPrice(){
         return price;
     }
 }
