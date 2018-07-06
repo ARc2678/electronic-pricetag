@@ -18,16 +18,16 @@ public class Listener extends JFrame implements ActionListener{
 
     private static final long serialVersionUID = 1L;
     public int act = 0;
-    private JLabel inputID,inputPrice,inputDomain,inputName;
-    private JTextField viewID, viewPrice,viewName;
-    private JTextField ipID,ipPrice,ipName,ipDomain;
-    private JTextField searchID;
+    private JLabel inputID,inputPrice,inputDomain,inputName,inputDescription;
+    private JTextField viewID, viewPrice,viewName,viewDescription;
+    private JTextField ipID,ipPrice,ipName,ipDomain,ipDescription;
+    private JTextField searchID,searchMediaID;
     private JTextField ipEslCode;
     private JPanel Main,viewPanel = new JPanel(),viewPanel2 = new JPanel(),viewPanel3 = new JPanel();
     private JPanel addPanel = new JPanel(),addPanel2 = new JPanel(),addPanel3 = new JPanel();
     private JPanel bindPanel = new JPanel(), bindPanel2 = new JPanel();
     private Item item = new Item();
-    private JPanel SearchPanel = new JPanel();
+    private JPanel SearchPanel = new JPanel(),SearchMediaPanel = new JPanel();
 
     public Listener(){
         setTitle("电子价签");
@@ -35,16 +35,20 @@ public class Listener extends JFrame implements ActionListener{
 
         JButton add = new JButton("添加商品");
         add.addActionListener(this);
-        JButton search = new JButton("查询商品");
-        search.addActionListener(this);
+        JButton searchID = new JButton("查询商品");
+        searchID.addActionListener(this);
         JButton bind = new JButton("绑定标签");
         bind.addActionListener(this);
+        JButton searchMediaID = new JButton("查询标签");
+        searchMediaID.addActionListener(this);
 
         Main.add(add);
-        Main.add(search);
+        Main.add(searchID);
         Main.add(bind);
+//        Main.add(searchMediaID);
         this.add(Main);
 
+        this.setLayout(new GridLayout(4,2));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setVisible(true);
@@ -53,14 +57,14 @@ public class Listener extends JFrame implements ActionListener{
     public void addOp(){//切换到添加商品的界面
 
         JButton myButton1 = new JButton("确认添加");
-        inputID= new JLabel("请输入商品ID");
+        JLabel inputID= new JLabel("请输入商品ID");
         ipID = new JTextField(10);
-        inputPrice = new JLabel("请输入商品价格");
+        JLabel inputPrice = new JLabel("请输入商品价格");
         ipPrice = new JTextField(10);
-        inputName = new JLabel("请输入商品名称");
+        JLabel inputName = new JLabel("请输入商品名称");
         ipName = new JTextField(10);
-        inputDomain = new JLabel("请输入商品domain");
-        ipDomain = new JTextField(10);
+        JLabel inputDescription = new JLabel("请输入商品描述");
+        ipDescription = new JTextField(10);
 
         myButton1.addActionListener(this);
 
@@ -70,11 +74,13 @@ public class Listener extends JFrame implements ActionListener{
         addPanel.add(ipName);
         addPanel2.add(inputPrice);
         addPanel2.add(ipPrice);
+        addPanel2.add(inputDescription);
+        addPanel2.add(ipDescription);
         addPanel3.add(myButton1);
         this.add(addPanel);
         this.add(addPanel2);
         this.add(addPanel3);
-        this.setLayout(new GridLayout(4,2));
+//        this.setLayout(new GridLayout(4,2));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setVisible(true);
@@ -83,17 +89,38 @@ public class Listener extends JFrame implements ActionListener{
     public void deleteOp() {
     }
 
+    public void searchMediaOp(){
+        JButton myButton1 = new JButton("查询");
+        inputID= new JLabel("请输入标签ID");
+        searchMediaID = new JTextField(10);
+        myButton1.addActionListener(this);
+
+        SearchMediaPanel.add(inputID);
+        SearchMediaPanel.add(searchMediaID);
+        SearchMediaPanel.add(myButton1);
+        this.add(SearchMediaPanel);
+//        this.setLayout(new GridLayout(4,2));
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(800, 600);
+        setVisible(true);
+    }
+
+    public void viewMediaResult(){
+
+    }
+
     public void searchOp(){//切换到查询商品的界面
         JButton myButton1 = new JButton("查询");
-        inputID= new JLabel("请输入商品ID1");
+        inputID= new JLabel("请输入商品ID");
         searchID = new JTextField(10);
         myButton1.addActionListener(this);
 
+//        this.setLayout(new GridLayout(4,2));
         SearchPanel.add(inputID);
         SearchPanel.add(searchID);
         SearchPanel.add(myButton1);
         this.add(SearchPanel);
-        this.setLayout(new GridLayout(4,2));
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
@@ -102,11 +129,11 @@ public class Listener extends JFrame implements ActionListener{
 
     public void clear(){
         SearchPanel.removeAll();
-        viewPanel3.removeAll();
         viewPanel.removeAll();
         viewPanel2.removeAll();
-        addPanel2.removeAll();
+        viewPanel3.removeAll();
         addPanel.removeAll();
+        addPanel2.removeAll();
         addPanel3.removeAll();
         bindPanel.removeAll();
         bindPanel2.removeAll();
@@ -135,6 +162,9 @@ public class Listener extends JFrame implements ActionListener{
         JLabel priceInfo = new JLabel("商品价格");
         viewPrice = new JTextField(searchedItem.getPrice() + "");
         viewPrice.setColumns(10);
+        JLabel descriptionInfo = new JLabel("商品描述");
+        viewDescription = new JTextField(searchedItem.getDescription());
+        viewDescription.setColumns(10);
 
         JButton modi = new JButton("修改");
         modi.addActionListener(this);
@@ -147,13 +177,15 @@ public class Listener extends JFrame implements ActionListener{
         viewPanel.add(viewName);
         viewPanel2.add(priceInfo);
         viewPanel2.add(viewPrice);
+        viewPanel2.add(descriptionInfo);
+        viewPanel2.add(viewDescription);
         viewPanel3.add(modi);
-        viewPanel3.add(del);
+//        viewPanel3.add(del);
 
         this.add(viewPanel);
         this.add(viewPanel2);
         this.add(viewPanel3);
-        this.setLayout(new GridLayout(4,2));
+//        this.setLayout(new GridLayout(4,2));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setVisible(true);
@@ -166,12 +198,15 @@ public class Listener extends JFrame implements ActionListener{
         ipID = new JTextField(10);
         JButton bind = new JButton("绑定");
         bind.addActionListener(this);
+        JButton unbind = new JButton("解绑");
+        unbind.addActionListener(this);
 
         bindPanel.add(EslCode);
         bindPanel.add(ipEslCode);
         bindPanel.add(ID);
         bindPanel.add(ipID);
         bindPanel2.add(bind);
+        bindPanel2.add(unbind);
         this.add(bindPanel);
         this.add(bindPanel2);
         this.setLayout(new GridLayout(4,2));
@@ -188,7 +223,13 @@ public class Listener extends JFrame implements ActionListener{
         } catch (UnirestException e) {
             e.printStackTrace();
         }
-        item = null;
+        if(req.getStatusCode() == 200){
+            JOptionPane.showMessageDialog(this,"绑定成功");
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"Error! Status Code = " + req.getStatusCode());
+        }
+//        item = null;
     }
 
     public void actionPerformed (ActionEvent e) {
@@ -203,6 +244,7 @@ public class Listener extends JFrame implements ActionListener{
             item.setId(ipID.getText());
             item.setPrice(Double.parseDouble(ipPrice.getText()));
             item.setName(ipName.getText());
+            item.setDescription(ipDescription.getText());
             httpreq post = new httpreq();
             try {
                 post.doPost(item);
@@ -215,17 +257,29 @@ public class Listener extends JFrame implements ActionListener{
             else{
                 JOptionPane.showMessageDialog(this,"Error! Status Code = " + post.getStatusCode());
             }
-            item = null;
+//            item = null;
         }
 
-        if(cmd.equals("删除")){
-            deleteOp();
-        }
         if(cmd.equals("绑定标签")){//进入输入esl码和商品id的界面
             bindOp();
         }
         if(cmd.equals("绑定")){
             doBind();
+        }
+
+        if(cmd.equals("解绑")){
+            httpreq req = new httpreq();
+            try {
+                req.unbind(ipEslCode.getText());
+            } catch (UnirestException e1) {
+                e1.printStackTrace();
+            }
+            if(req.getStatusCode() == 200){
+                JOptionPane.showMessageDialog(this,"解绑成功");
+            }
+            else{
+                JOptionPane.showMessageDialog(this,"Error! Status Code = " + req.getStatusCode());
+            }
         }
 
         if(cmd.equals("查询商品")){
@@ -245,6 +299,7 @@ public class Listener extends JFrame implements ActionListener{
             item.setId(viewID.getText());
             item.setPrice(Double.parseDouble(viewPrice.getText()));
             item.setName(viewName.getText());
+            item.setDescription(viewDescription.getText());
             httpreq post = new httpreq();
             try {
                 post.doPost(item);
@@ -257,7 +312,7 @@ public class Listener extends JFrame implements ActionListener{
             else{
                 JOptionPane.showMessageDialog(this,"Error! Status Code = " + post.getStatusCode());
             }
-            item = null;
+//            item = null;
         }
     }
 

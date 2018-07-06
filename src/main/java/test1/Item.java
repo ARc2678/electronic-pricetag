@@ -16,15 +16,17 @@ public class Item {
     private String id;
     private String domain;
     private String name;
+    private String description;
     private double price;
 
     public Item(){};
 
-    public Item(String id, String domain, String name, int price){
+    public Item(String id, String domain, String name, int price,String description){
         this.id = id;
         this.name = name;
         this.domain = domain;
         this.price = price;
+        this.description = description;
     }
 
     public String toJson(Object obj){
@@ -38,9 +40,7 @@ public class Item {
         //去除空值
         JSONObject json = JSONObject.fromObject(obj,jsonConfig);//将java对象转换为json对象
         String str = json.toString();//将json对象转换为字符串
-
-        System.out.print(str);
-
+//        System.out.print(str);
         return str;
     }
 
@@ -58,6 +58,14 @@ public class Item {
 
     public String getDomain(){
         return domain;
+    }
+
+    public void setDescription(String description){
+        this.description = description;
+    }
+
+    public String getDescription(){
+        return description;
     }
 
     public void setName(String name){
