@@ -14,13 +14,14 @@ import net.sf.json.util.PropertyFilter;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Item {
     private String id;
-    private String domain;
+    private String domain;//unused property
     private String name;
     private String description;
     private double price;
 
     public Item(){};
 
+    //unused constructor
     public Item(String id, String domain, String name, int price,String description){
         this.id = id;
         this.name = name;
@@ -37,9 +38,8 @@ public class Item {
             }
         };
         jsonConfig.setJsonPropertyFilter(filter);
-        //去除空值
-        JSONObject json = JSONObject.fromObject(obj,jsonConfig);//将java对象转换为json对象
-        String str = json.toString();//将json对象转换为字符串
+        JSONObject json = JSONObject.fromObject(obj,jsonConfig);
+        String str = json.toString();
         return str;
     }
 
@@ -51,13 +51,13 @@ public class Item {
         return id;
     }
 
-    public void setDomain(String domain){
-        this.domain = domain;
-    }
-
-    public String getDomain(){
-        return domain;
-    }
+//    public void setDomain(String domain){
+//        this.domain = domain;
+//    }
+//
+//    public String getDomain(){
+//        return domain;
+//    }
 
     public void setDescription(String description){
         this.description = description;
